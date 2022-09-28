@@ -1,4 +1,4 @@
-# EWallet
+# e-wallet-Alkemy
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.1.
 
@@ -26,15 +26,16 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
-## DEpendencias y comandos de instalación
-npm install
-ng add @angular/material
-npm install bootstrap
-npm i --save-dev @types/node
-npm i @angular/material-moment-adapter
-npm install --save ngx-logger
-npm i --save lodash
-npm i angular-moment
+## Dependencias y comandos de instalación
+
+- npm install
+- ng add @angular/material
+- npm install bootstrap
+- npm i --save-dev @types/node
+- npm i @angular/material-moment-adapter
+- npm install --save ngx-logger
+- npm i --save lodash
+- npm i angular-moment
 
 
 ## Reglas
@@ -46,5 +47,3 @@ npm i angular-moment
 - Creada con Angular v14
 - Utiliza Angular Material Framework para app compoments
 - CSS template engine is SCSS
-- Ngx Cookie Service used to handle cookies
-- User ids gererated with uuid

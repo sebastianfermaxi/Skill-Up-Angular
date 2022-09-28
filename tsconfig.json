@@ -3,12 +3,6 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
-    "paths": {
-      "@env*": ["environments/*"],
-      "@core*": ["app/core/*"],
-      "@comp*": ["app/shared/components/*"],
-      "@pages*": ["app/pages/*"]
-    },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -22,6 +16,7 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
+    "resolveJsonModule":true,
     "target": "es2020",
     "module": "es2020",
     "lib": [

@@ -5,9 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { LoggerModule } from 'ngx-logger';
-import { environment } from 'src/environments/environment';
-
 @NgModule({
   declarations: [
     AppComponent
@@ -15,12 +12,7 @@ import { environment } from 'src/environments/environment';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    LoggerModule.forRoot({
-      //serverLoggingUrl: `${ environment.apiUrl}/v1/logs`,
-      level: environment.logLevel,
-      serverLogLevel: environment.serverLogLevel      
-    })
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
