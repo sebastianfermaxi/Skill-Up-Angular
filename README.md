@@ -32,10 +32,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 - ng add @angular/material
 - npm install bootstrap
 - npm i --save-dev @types/node
-- npm i @angular/material-moment-adapter
 - npm install --save ngx-logger
-- npm i --save lodash
-- npm i angular-moment
 
 
 ## Reglas
