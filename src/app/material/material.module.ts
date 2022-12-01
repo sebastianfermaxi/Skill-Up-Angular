@@ -102,4 +102,5 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatDividerModule
   ],
 })
-export class MaterialModule { }
+export class MaterialModule {}
+
