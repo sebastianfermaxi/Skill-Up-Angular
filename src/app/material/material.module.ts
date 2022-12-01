@@ -1,6 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
+import {  MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatInputModule } from '@angular/material/input';
@@ -32,6 +39,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     CommonModule,
     MatButtonModule,
     MatToolbarModule,
+		MatSnackBarModule,
     MatBadgeModule,
     MatInputModule,
     MatSelectModule,
@@ -54,11 +62,17 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatMenuModule,
     MatExpansionModule,
     MatTabsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+		MatCheckboxModule,
+		MatDatepickerModule,
+		MatNativeDateModule,
+		MatButtonToggleModule,
+		MatDividerModule
   ],
   exports: [
     MatButtonModule,
     MatToolbarModule,
+		MatSnackBarModule,
     MatBadgeModule,
     MatInputModule,
     MatSelectModule,
@@ -81,7 +95,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatMenuModule,
     MatExpansionModule,
     MatTabsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+		MatCheckboxModule,
+		MatDatepickerModule,
+		MatNativeDateModule,
+		MatButtonToggleModule,
+		MatDividerModule
   ],
 })
 export class MaterialModule { }
