@@ -1,0 +1,59 @@
+<mat-card class="deposit-container">
+
+    <mat-card-title class="filter-title">Crear un nuevo plazo fijo</mat-card-title>
+
+    <form [formGroup]="fixedDepositForm" class="deposit-form" novalidate>
+
+        <!-- seleccion de cuenta -->
+        <mat-form-field appearance="fill">
+            <mat-label>Seleccionar cuenta</mat-label>
+            <mat-select (selectionChange)="elegirCuenta($event.value)" appearance="fill">
+                <mat-option *ngFor="let account of accounts" [value]="account.id">
+                N° de cuenta {{account.id}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <!-- saldo -->
+        <mat-form-field appearance="fill">
+            <mat-label>Saldo en cuenta</mat-label>
+            <span matPrefix>$</span>
+            <input matInput [defaultValue]="saldo" disabled>
+        </mat-form-field>
+
+        <!-- deposito -->
+        <mat-form-field appearance="fill">
+
+            <mat-label>Monto a depositar</mat-label>
+            <input matInput formControlName="monto">
+
+            <!-- validacion -->
+            <mat-error *ngIf="!fixedDepositForm.get('monto')?.errors?.required && (fixedDepositForm.get('monto')?.errors?.pattern)">
+                Por favor ingrese un valor númerico
+            </mat-error>
+            <mat-error *ngIf="fixedDepositForm.get('monto')?.invalid && (fixedDepositForm.get('monto')?.dirty || fixedDepositForm.get('monto')?.touched) && fixedDepositForm.get('monto')?.errors?.required">
+                Este campo no puede estar vacío
+            </mat-error>
+            <mat-error *ngIf="!fixedDepositForm.get('monto')?.errors?.required && (fixedDepositForm.get('monto')?.errors?.min)">
+                El monto debe ser mayor a 0
+            </mat-error>
+            <mat-error *ngIf="!fixedDepositForm.get('monto')?.errors?.required && (fixedDepositForm.get('monto')?.errors?.max)">
+                Sin fondos suficientes
+            </mat-error>
+        </mat-form-field>
+        <button mat-stroked-button color="primary" [disabled]="!fixedDepositForm.valid" (click)="submit()" >Crear</button>
+    </form>
+
+    <!-- listado de inversiones actuales -->
+    <ew-table
+        [list]="investments" 
+        [columns]="displayedColumns" 
+        [columnsHeader]="columnsHeader"
+        [pageSizeOptions]="[10,25,100,200]"
+        title="Inversiones actuales"
+        optional="Sin inversiones realizadas" 
+        [loading]="loading"
+        (retirar)="receiverRetirar($event)">
+    </ew-table>
+
+</mat-card>
