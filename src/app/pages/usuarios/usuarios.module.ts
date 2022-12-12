@@ -10,6 +10,6 @@ import { PerfilEditComponent } from './perfil-edit/perfil-edit.component';
 
 @NgModule({
   declarations: [UsuariosComponent, ResetPassComponent, PerfilEditComponent],
-  imports: [CommonModule, UsuariosRoutingModule, MaterialModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, UsuariosRoutingModule, MaterialModule, FormsModule, ReactiveFormsModule]
 })
-export class UsuariosModule {}
+export class UsuariosModule { }
