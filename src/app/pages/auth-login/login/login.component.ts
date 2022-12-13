@@ -8,7 +8,6 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { HttpService } from 'src/app/core/services/http.service';
-import { AlertComponent } from 'src/app/shared/components/alert/alert.component';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +20,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   title = 'Login';
   showPassword: boolean = false;
-  
+
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -51,7 +50,7 @@ export class LoginComponent implements OnInit {
     }
     this.http.post(`/auth/login`, this.loginForm.value).subscribe({
       next: (res) => this.responseHandler(res),
-      error: (err) => this.errorHandler(err),
+      error: () => this.loading = false,
       complete: () => {
         this.loading = false;
         this.router.navigate(['home'])
@@ -59,32 +58,27 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  private openDialog(
-    enterAnimationDuration: string,
-    exitAnimationDuration: string,
-    title: string,
-    content: string
-  ): void {
-    this.dialog.open(AlertComponent, {
-      width: '600px',
-      enterAnimationDuration,
-      exitAnimationDuration,
-      disableClose: true,
-      data: {
-        title,
-        content,
-      },
-    });
-  }
-
   private responseHandler(res: any): void {
     if (res.accessToken) {
       localStorage.setItem('token', res.accessToken);
+      this.http.get('/accounts/me').subscribe({
+        next: (res) => this.accountsHandler(res),
+        error: () => {
+          this.loading = false
+        },
+        complete: () => {
+          this.loading = false;
+          this.router.navigate(['/home']);
+        }
+      });
     }
   }
 
-  private errorHandler(error: any) {
-    this.openDialog('0ms', '0ms', 'Error loging in!', error.statusText);
+  private accountsHandler(res: any): void {
+    if (res.length === 0) {
+      this.createAccount(res.id)
+      this.createAccount(res.id)
+    }
   }
 
   redirect(route: string): void {
@@ -93,5 +87,17 @@ export class LoginComponent implements OnInit {
 
   public togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
+  }
+
+  private createAccount(userId: number): void {
+    const newAccount = {
+      "creationDate": `${new Date()}`,
+      "money": 0,
+      "isBlocked": false,
+      "userId": userId
+    }
+    this.http.post(`/accounts`, newAccount).subscribe({
+      error: (err) => this.router.navigate(['/auth/login'])
+    })
   }
 }
