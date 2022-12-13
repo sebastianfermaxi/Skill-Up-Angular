@@ -29,7 +29,8 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/logo-alk.ico",
-              "src/assets"
+              "src/assets",
+							"src/_redirects"
             ],
             "styles": [
               "src/styles/_angular-material.scss",
