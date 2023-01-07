@@ -7,7 +7,11 @@ import {
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { HttpService } from 'src/app/core/services/http.service';
+import { authLogin_REQ, authLogin_RES } from 'src/app/core/state/actions/auth.actions';
+import { AppState } from 'src/app/core/state/app.state';
+import { Store } from '@ngrx/store';
+import { AuthService } from 'src/app/core/state/services/auth.service';
+//import { HttpService } from 'src/app/core/services/http.service';
 
 @Component({
   selector: 'app-login',
@@ -24,8 +28,10 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private http: HttpService,
-    public dialog: MatDialog
+    //private http: HttpService,
+    private authS: AuthService,
+    public dialog: MatDialog,
+    private store: Store<AppState>
   ) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [
@@ -48,7 +54,9 @@ export class LoginComponent implements OnInit {
       this.loading = false;
       return;
     }
-    this.http.post(`/auth/login`, this.loginForm.value).subscribe({
+    //this.store.dispatch(authLogin_REQ({loginForm:this.loginForm.value}))
+
+    this.authS.login(this.loginForm.value).subscribe({
       next: (res) => this.responseHandler(res),
       error: () => this.loading = false,
       complete: () => {
@@ -58,9 +66,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  private responseHandler(res: any): void {
-    if (res.accessToken) {
-      localStorage.setItem('token', res.accessToken);
+  private responseHandler(loginRes: any): void {
+    if (loginRes.accessToken) {
+      localStorage.setItem('token', loginRes.accessToken)
+      this.store.dispatch(authLogin_RES({loginRes}))
     }
   }
 
@@ -68,7 +77,7 @@ export class LoginComponent implements OnInit {
     this.router.navigate([route])
   }
 
-  public togglePasswordVisibility(): void {
+  togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
 

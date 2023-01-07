@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ExchangeService } from 'src/app/core/services/exchange.service';
-import { HttpService } from 'src/app/core/services/http.service';
+//import { HttpService } from 'src/app/core/services/http.service';
 
 @Component({
   selector: 'ew-divisas',
@@ -26,7 +26,7 @@ export class DivisasComponent implements OnInit, OnDestroy {
   constructor(
     private exchangeService: ExchangeService,
     public fb: FormBuilder,
-    public http: HttpService
+    //public http: HttpService
   ) {
     this.form = fb.group({
       moneda: [''],

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { HttpService } from 'src/app/core/services/http.service';
+//import { HttpService } from 'src/app/core/services/http.service';
 
 @Component({
   selector: 'ew-perfil-edit',
@@ -18,7 +18,7 @@ export class PerfilEditComponent implements OnInit {
   roleId: number = -1;
   points: number = -1;
 
-  constructor(private http: HttpService) {
+  constructor(/*private http: HttpService*/) {
     this.editUserForm = new FormGroup({
       first_name: new FormControl('',  [Validators.required, Validators.pattern("^[a-zA-Z]+$"), Validators.minLength(2)]),
       last_name: new FormControl('',  [Validators.required, Validators.pattern("^[a-zA-Z]+$"), Validators.minLength(2)]),
@@ -28,6 +28,8 @@ export class PerfilEditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //TODO: Tomarlo del store
+    /*
     this.http.get('/auth/me').subscribe({
       next: (res: any) => {
 
@@ -40,7 +42,7 @@ export class PerfilEditComponent implements OnInit {
         this.editUserForm.get('email').setValue(res.email);
         
       }
-    })
+    })*/
   }
 
   submit():void {
@@ -49,6 +51,8 @@ export class PerfilEditComponent implements OnInit {
     this.email = this.editUserForm.controls.email.value;
     const password = this.editUserForm.controls.password.value;
 
+    //TODO: implementar la action
+    /*
     this.http.put(`/users/${this.userId}`, {
       "first_name": this.first_name,
       "last_name": this.last_name,
@@ -60,7 +64,7 @@ export class PerfilEditComponent implements OnInit {
       next: (res: any) => {
         window.location.reload();
       }
-    })
+    })*/
   }
 
 }

@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects'; //TODO <---
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { EMPTY } from 'rxjs';
 import { map, mergeMap, catchError, withLatestFrom } from 'rxjs/operators';
 import { Transaction } from '../../interfaces/Transaction';
 import { DateTimeService } from '../../services/date-time.service';
-import { TransactionsService } from '../../services/transactions.service';
+
 import { AppState } from '../app.state';
 import { AccountsStates, ChartBalancesData, ChartTopPayData, TableData } from '../interfaces/state.interface';
 import { chartTopPayData, trQueryMade, selectAllTransactions, tableData } from 'src/app/core/state/selectors/transactions.selectors';
 import { Store } from '@ngrx/store';
 import { trTopupPaymentFilterChart_REQ } from '../actions/transaction.actions';
 import { accountsQueryMade, ARSAccount, selectAccounts } from '../selectors/accounts.selectors';
+import { TransactionsService } from '../services/transactions.service';
 
 @Injectable()
 export class TransactionsEffects {

@@ -11,7 +11,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { appEffects, appReducer } from './core/state/index';
 
-import { reducers, ROOT_EFFECTS } from './core/state/app.state';
+import { ROOT_REDUCERS, ROOT_EFFECTS } from './core/state/app.state';
 import { HttpErrorInterceptor } from './core/interceptors/http-error.interceptor';
 import { PerfilDetailModule } from './pages/usuarios/perfil-detail/perfil-detail.module';
 import { PerfilEditComponent } from './pages/usuarios/perfil-edit/perfil-edit.component';
@@ -26,7 +26,7 @@ import { PerfilEditComponent } from './pages/usuarios/perfil-edit/perfil-edit.co
     SharedModule,
     HttpClientModule,
     PerfilDetailModule,
-    StoreModule.forRoot(reducers),
+    StoreModule.forRoot(ROOT_REDUCERS),
     EffectsModule.forRoot(ROOT_EFFECTS),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states

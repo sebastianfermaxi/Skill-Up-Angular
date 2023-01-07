@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ExchangeService } from 'src/app/core/services/exchange.service';
-import { HttpService } from 'src/app/core/services/http.service';
+//import { HttpService } from 'src/app/core/services/http.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Investment } from 'src/app/core/interfaces/Investment';
 import { MatDialog } from '@angular/material/dialog';
@@ -48,7 +48,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     private exchangeService: ExchangeService,
-    public http: HttpService,
+    //public http: HttpService,
     private dev: DevelopmentOnlyService,
     private store: Store<AppState>
   ) {
@@ -62,8 +62,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.exchange = data;
     });
 
-
-    this.httpService = this.http.get('/accounts/me').subscribe({
+    //TODO: modularizar los componentes para poder usarlos en el dashboard
+    /*this.httpService = this.http.get('/accounts/me').subscribe({
       next: (res) => this.handleNext(res),
       error: () => this.loading = false,
       complete: () => this.loading = false
@@ -75,7 +75,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       } else { //Si no estan cargados se los pide a la API
         this.store.dispatch(transactions_REQ())
       }
-    })
+    })*/
 
 
     // this.trQueryMade$.subscribe((made) => {

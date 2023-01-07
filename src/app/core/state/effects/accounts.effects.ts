@@ -5,7 +5,7 @@ import { EMPTY } from 'rxjs';
 import { map, mergeMap, catchError, withLatestFrom } from 'rxjs/operators';
 import { AppState } from '../app.state';
 import { Store } from '@ngrx/store';
-import { AccountsService } from '../../services/accounts.service';
+import { AccountsService } from '../services/accounts.service';
 
 @Injectable()
 export class AccountsEffects {
