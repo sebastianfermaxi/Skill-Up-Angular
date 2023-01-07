@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from 'src/app/core/services/users.service';
+import { UsersService } from 'src/app/core/state/services/users.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -18,6 +18,7 @@ export class PerfilDetailComponent implements OnInit {
     this.traerLogin();
   }
 
+  //TODO: moverlo al servicio
   traerLogin() {
     this.userService.get('http://wallet-main.eba-ccwdurgr.us-east-1.elasticbeanstalk.com/auth/me').subscribe(respuesta => {
       this.perfil = respuesta;

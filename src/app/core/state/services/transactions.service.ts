@@ -1,11 +1,10 @@
 import { Injectable, Type } from '@angular/core';
 import { from, Observable, of, switchMap } from 'rxjs';
-import { APITransactions } from '../interfaces/APITransactions';
-import { Transaction } from '../interfaces/Transaction';
-import { HttpService } from './http.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { TransactionsState } from '../state/interfaces/state.interface';
+import { TransactionsState } from '../interfaces/state.interface';
+import { APITransactions } from '../../interfaces/APITransactions';
+import { Transaction } from '../../interfaces/Transaction';
 
 @Injectable({
   providedIn: 'root'

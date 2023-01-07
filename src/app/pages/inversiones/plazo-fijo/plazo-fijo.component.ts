@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { Account } from 'src/app/core/interfaces/Account';
 import { Investment } from 'src/app/core/interfaces/Investment';
-import { HttpService } from 'src/app/core/services/http.service';
+//import { HttpService } from 'src/app/core/services/http.service';
 import { AppState } from 'src/app/core/state/app.state';
 import { ARSAccount } from 'src/app/core/state/selectors/accounts.selectors';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
@@ -44,7 +44,7 @@ export class PlazoFijoComponent implements OnInit, OnDestroy {
   displayedColumns = ["creation_date", "amount", "acciones"];
   columnsHeader = ["Fecha de creación", "Monto ($)", "Acciones"];
 
-  constructor(private http: HttpService, private store: Store<AppState>, public dialog: MatDialog) {
+  constructor(/*private http: HttpService,*/ private store: Store<AppState>, public dialog: MatDialog) {
     this.fixedDepositForm = new FormGroup({
       monto: new FormControl('', [Validators.required, Validators.pattern("^[0-9]{1,9}([,.][0-9]{1,2})?$"), Validators.min(0.01)]),
     })
@@ -55,8 +55,8 @@ export class PlazoFijoComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    // traer cuentas en pesos del usuario
-    this.httpSub = this.http.get('/accounts/me').subscribe({
+    //TODO: traer cuentas en pesos del usuario
+    /*this.httpSub = this.http.get('/accounts/me').subscribe({
       next: (res: any) => {
         this.accounts = res;
         // valida que el monto a congelar sea menor al saldo en cuenta
@@ -73,10 +73,10 @@ export class PlazoFijoComponent implements OnInit, OnDestroy {
           this.elegirCuenta(this.ars.id);
         }, 1500);
       }
-    })
+    })*/
 
-    // traer listado de inversiones
-    this.httpSub = this.http.get('/fixeddeposits').subscribe({
+    //TODO: traer listado de inversiones
+    /*this.httpSub = this.http.get('/fixeddeposits').subscribe({
       next: (res: any) => {
         this.investments = res.data;
         // formato de fecha
@@ -87,7 +87,7 @@ export class PlazoFijoComponent implements OnInit, OnDestroy {
 
         this.loading = false;
       }
-    })
+    })*/
   }
 
   ngOnDestroy(): void {
@@ -117,7 +117,8 @@ export class PlazoFijoComponent implements OnInit, OnDestroy {
   submit(): void {
     let date = new Date().toLocaleDateString('en-CA');
 
-    // restar saldo de la cuenta
+    //TODO: restar saldo de la cuenta
+    /*
     this.httpSub = this.http.post('/transactions', {
       "amount": this.fixedDepositForm.controls.monto.value,
       "concept": "Inversion plazo fijo",
@@ -137,8 +138,10 @@ export class PlazoFijoComponent implements OnInit, OnDestroy {
         // })
       }
     })
+    */
 
-    // crear plazo fijo
+    //TODO: crear plazo fijo
+    /*
     this.httpSub = this.http.post('/fixeddeposits', {
       "userId": this.userId,
       "accountId": this.selectedAccountId,
@@ -150,7 +153,7 @@ export class PlazoFijoComponent implements OnInit, OnDestroy {
         // refresca la pagina
         window.location.reload();
       }
-    })
+    })*/
   }
 
   receiverRetirar(data: any): void {
@@ -161,7 +164,8 @@ export class PlazoFijoComponent implements OnInit, OnDestroy {
     const timeElapsed = closing_date.getTime() - creation_date.getTime();
     const daysElapsed = Math.floor(timeElapsed / (1000 * 3600 * 24));
 
-    //eliminar el plazo fijo
+    //TODO: eliminar el plazo fijo
+    /*
     this.httpSub = this.http.delete(`/fixeddeposits/${data.id}`).subscribe({
       next: res => {
         // this.dialog.open(DialogComponent, {
@@ -173,8 +177,10 @@ export class PlazoFijoComponent implements OnInit, OnDestroy {
         // })
       }
     });
+    */
 
-    //agregar ganancia a la cuenta
+    //TODO:agregar ganancia a la cuenta
+    /*
     this.httpSub = this.http.post(`/accounts/${data.accountId}`, {
       "type": "payment",
       "concept": "Ganancia plazo fijo",
@@ -184,7 +190,7 @@ export class PlazoFijoComponent implements OnInit, OnDestroy {
         // refresca
         window.location.reload();
       }
-    })
+    })*/
   }
 
   // pasa la data de la inversion elegida para ver la proyeccion

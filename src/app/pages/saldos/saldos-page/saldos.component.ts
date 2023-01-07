@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { map, Observable, Subscription } from 'rxjs';
-import { HttpService } from 'src/app/core/services/http.service';
+//import { HttpService } from 'src/app/core/services/http.service';
 import { AppState } from 'src/app/core/state/app.state';
 import { ARSAccount, USDAccount } from 'src/app/core/state/selectors/accounts.selectors';
 import { selectAllTransactions } from 'src/app/core/state/selectors/transactions.selectors';
@@ -28,7 +28,7 @@ export class SaldosComponent implements OnInit, OnDestroy {
 
   constructor(
     public dialog: MatDialog,
-    private httpService: HttpService,
+    //private httpService: HttpService,
     private store: Store<AppState>,
     private snack: MatSnackBar
   ) {
@@ -67,7 +67,8 @@ export class SaldosComponent implements OnInit, OnDestroy {
   }
 
   getSaldos() {
-    this.saldos$ = this.httpService.get('/transactions').pipe(
+    //TODO: iMPLEMENTAR SALDOS
+    /*this.saldos$ = this.httpService.get('/transactions').pipe(
       map((x: any) => {
         const res = x.data.filter((e: any) => {
           if (e.type === 'topup') {
@@ -76,7 +77,7 @@ export class SaldosComponent implements OnInit, OnDestroy {
         });
         return res;
       })
-    );
+    );*/
   }
 
   addSaldo(): void {
@@ -93,7 +94,8 @@ export class SaldosComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.httpService
+        //TODO: iMPLEMENTAR SALDOS
+        /*this.httpService
           .post('/accounts/' + result.cuenta, {
             type: 'topup',
             concept: result.concepto,
@@ -105,6 +107,7 @@ export class SaldosComponent implements OnInit, OnDestroy {
               duration: 900,
             });
           });
+          */
       }
     });
   }
@@ -122,6 +125,8 @@ export class SaldosComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
+        //TODO
+        /*
         this.httpService
           .put('/transactions/' + id, {
             amount: result.cantidad,
@@ -138,6 +143,7 @@ export class SaldosComponent implements OnInit, OnDestroy {
               duration: 900,
             });
           });
+          */
       }
     });
   }

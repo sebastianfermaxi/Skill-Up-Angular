@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { HttpService } from 'src/app/core/services/http.service';
+//import { HttpService } from 'src/app/core/services/http.service';
 import { IBalance } from 'src/app/core/interfaces/Balance';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/state/app.state';
@@ -34,7 +34,7 @@ export class BalancesComponent implements OnInit, OnDestroy {
   trQueryMade: boolean = false
 
   constructor(
-    private http: HttpService,
+    //private http: HttpService,
     private store: Store<AppState>
   ) {
     this.trQueryMade$ = this.store.select(trQueryMade);
@@ -43,11 +43,8 @@ export class BalancesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.http.get('/accounts/me').subscribe(response => {
-      this.handleNext(response)
-      this.loading = false
-    })
-
+    //TODO: Usar storage
+    /*
     //Iniciador del estado para las transacciones
     this.trQueryMadeSub = this.trQueryMade$.subscribe(made => {
       if (made) { //Si los datos ya estan cargados
@@ -59,7 +56,7 @@ export class BalancesComponent implements OnInit, OnDestroy {
         this.store.dispatch(transactions_REQ())
       }
     })
-
+    */
     //Iniciador del estado para las cuentas
     this.selectAccounts = this.selectAccounts$.subscribe((accountsStates: AccountsStates) => {
       if (accountsStates.AccountsQueryMade) { //Si los datos ya estan cargados

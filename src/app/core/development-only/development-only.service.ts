@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Account } from '../interfaces/Account';
 import { NewAccount } from '../interfaces/NewAccount';
-import { HttpService } from '../services/http.service';
+//import { HttpService } from '../services/http.service';
 import { AppState } from '../state/app.state';
 import { AccountsStates } from '../state/interfaces/state.interface';
 import { selectAccounts } from '../state/selectors/accounts.selectors';
@@ -15,7 +15,7 @@ export class DevelopmentOnlyService {
 
   selectAccounts$: Observable<any> = new Observable()
 
-  constructor(private httpS:HttpService, private store:Store<AppState>) { 
+  constructor(/*private httpS:HttpService,*/ private store:Store<AppState>) { 
     this.selectAccounts$ = this.store.select(selectAccounts)
   }
 
@@ -55,7 +55,7 @@ export class DevelopmentOnlyService {
           "userId": ARSAccount.userId,
           "to_account_id": 1850
         }      
-        this.httpS.post('/transactions',tr).subscribe(res=>console.log(res))
+        //this.httpS.post('/transactions',tr).subscribe(res=>console.log(res))
         console.log(tr)
       }
     }
@@ -83,7 +83,7 @@ export class DevelopmentOnlyService {
           "userId": USDAccount.userId,
           "to_account_id": 1850
         }      
-        this.httpS.post('/transactions',tr).subscribe(res=>console.log(res))
+        //this.httpS.post('/transactions',tr).subscribe(res=>console.log(res))
         console.log(tr)
       }
     }

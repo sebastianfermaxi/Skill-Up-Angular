@@ -7,7 +7,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/state/app.state';
 import { User } from 'src/app/core/state/interfaces/state.interface';
 import { Observable, Subscription } from 'rxjs';
-import { selectedUser } from 'src/app/core/state/auth/auth.reducer';
+import { selectedUser, selectUser } from 'src/app/core/state/selectors/user.selectors';
+
 
 
 @Component({
@@ -31,9 +32,9 @@ export class HeaderComponent implements OnDestroy {
     private router: Router,
     private store: Store<AppState>
   ) {
-    this.currentUser$ = this.store.select(selectedUser);
+    this.currentUser$ = this.store.select(selectUser);
     this.currentUser = this.currentUser$.subscribe(value => {
-      this.user = value.autenticated && value.user
+      this.user = value.autenticated && value
     });
   }
 

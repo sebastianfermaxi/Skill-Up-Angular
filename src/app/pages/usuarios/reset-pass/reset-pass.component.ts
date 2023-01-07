@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { HttpService } from 'src/app/core/services/http.service';
+//import { HttpService } from 'src/app/core/services/http.service';
 import { AlertComponent } from 'src/app/shared/components/alert/alert.component';
 import { __values } from 'tslib';
 
@@ -20,7 +20,7 @@ export class ResetPassComponent implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private http: HttpService,
+    //private http: HttpService,
     public dialog: MatDialog
   ) {
     this.resetForm = new FormGroup({
@@ -49,11 +49,13 @@ export class ResetPassComponent implements OnInit {
     if (!this.resetForm.valid) {
       return;
     }
+    //TODO: RESET PASSWORD
+    /*
     this.http.post(`/auth/login`, this.resetForm.value).subscribe({
       next: (res) => this.responseHandler(res),
       error: (err) => this.errorHandler(err),
       complete: () => this.router.navigate(['/home']),
-    });
+    });*/
   }
 
   private responseHandler(res: any): void {

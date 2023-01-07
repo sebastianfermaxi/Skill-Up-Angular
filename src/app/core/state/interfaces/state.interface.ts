@@ -31,6 +31,14 @@ export interface TransactionsState {
   chartTopPayData: ChartTopPayData|null
   chartBalancesData: ChartBalancesData|null
 }
+
+export interface userState {
+  first_name : string | null
+  last_name : string | null
+  email: string | null
+  token: string | null
+  autenticated: boolean
+}
 export interface TableData {
   title: string;
   columns: string[];

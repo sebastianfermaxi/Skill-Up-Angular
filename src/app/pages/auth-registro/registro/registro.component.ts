@@ -7,10 +7,15 @@ import {
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { resolve } from 'path';
 import { Subscription } from 'rxjs';
+import { RegisterForm } from 'src/app/core/interfaces/RegisterForm';
 import { IUser } from 'src/app/core/interfaces/User';
-import { HttpService } from 'src/app/core/services/http.service';
+import { authLogin_REQ, authRegister_REQ } from 'src/app/core/state/actions/auth.actions';
+import { AppState } from 'src/app/core/state/app.state';
+import { AuthService } from 'src/app/core/state/services/auth.service';
+//import { HttpService } from 'src/app/core/services/http.service';
 import { AlertComponent } from 'src/app/shared/components/alert/alert.component';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 
@@ -26,12 +31,14 @@ export class RegistroComponent implements OnInit, OnDestroy {
   conditions = new FormControl(false, Validators.requiredTrue);
   conditionsText = "While using our Site, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you. Personally identifiable information may include, but is not limited to your name ('Personal Information')."
   httpService: Subscription = new Subscription;
+  showPassword: boolean = false;
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private http: HttpService,
-    public dialog: MatDialog
+    private authS: AuthService,
+    public dialog: MatDialog,
+    private store: Store<AppState>
   ) {
     this.registerForm = new FormGroup({
       firstname: new FormControl('', [Validators.required]),
@@ -62,15 +69,16 @@ export class RegistroComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const newUser = {
+    const registerForm: RegisterForm = {
       first_name: this.registerForm.value.firstname,
       last_name: this.registerForm.value.lastname,
       email: this.registerForm.value.email,
-      password: this.registerForm.value.password,
-      roleId: 1,
-      points: 0
+      password: this.registerForm.value.password
     }
-    this.httpService = this.http.post(`/users`, newUser).subscribe({
+    console.log('newUser',registerForm)
+    //TODO: Conviene usar storage?
+    //this.store.dispatch(authRegister_REQ({registerForm}))
+    this.httpService = this.authS.register(registerForm).subscribe({
       next: () => this.responseHandler(),
       error: (err) => this.errorHandler(err),
       complete: () => {
@@ -118,5 +126,9 @@ export class RegistroComponent implements OnInit, OnDestroy {
 
   redirect(route: string): void {
     this.router.navigate([route])
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
   }
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { APIUser } from 'src/app/core/interfaces/APIUsers';
-import { HttpService } from 'src/app/core/services/http.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -17,7 +16,7 @@ export class UsuariosComponent implements OnInit {
   }
   lastPageNumber:number=1
   
-  constructor(private httpS:HttpService) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.getUserPage(1)
@@ -27,14 +26,15 @@ export class UsuariosComponent implements OnInit {
     let route 
     route = pageNumber>1 ? `/?page=${pageNumber}` : ''
     this.spiner = true
-    this.httpS.get(`/users${route}`).subscribe({
+    //TODO: Lista de contactos
+    /*this.httpS.get(`/users${route}`).subscribe({
       next: res => {
         console.log('En get users',res)
         this.page = res as APIUser
         this.spiner = false
       },
       error: err => console.error(err)
-    })
+    })*/
   }
 
   changePage(add:number){

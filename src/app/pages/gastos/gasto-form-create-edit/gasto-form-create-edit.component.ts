@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { HttpService } from 'src/app/core/services/http.service';
+//import { HttpService } from 'src/app/core/services/http.service';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 import { IBill } from 'src/app/core/interfaces/Bills';
 import { Observable, Subscription } from 'rxjs';
@@ -10,8 +10,8 @@ import { AppState } from 'src/app/core/state/app.state';
 import { ARSAccount, selectedAccount, USDAccount } from 'src/app/core/state/selectors/accounts.selectors';
 import { MatSelectChange } from '@angular/material/select';
 import { accountToggle } from 'src/app/core/state/actions/account.actions';
-import { selectedUser } from 'src/app/core/state/auth/auth.reducer';
 import { Account } from 'src/app/core/interfaces/Account';
+import { selectedUser } from 'src/app/core/state/selectors/user.selectors';
 
 @Component({
   selector: 'ew-gasto-form-create-edit',
@@ -54,7 +54,7 @@ export class GastoFormCreateEditComponent implements OnInit, OnDestroy {
   @Output() billResponseChange: EventEmitter<IBill> = new EventEmitter();
 
   constructor(
-    private http: HttpService,
+    //private http: HttpService,
     public dialog: MatDialog,
     private store: Store<AppState>
   ) {
@@ -69,13 +69,15 @@ export class GastoFormCreateEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    //TODO: usar store
+    /*
     this.http.get('/accounts/me').subscribe({
       next: (res: any) => {
         this.accounts = res
       },
       error: () => this.errorHandler()
     }
-    )
+    )*/
   }
 
   ngOnDestroy(): void {
@@ -112,7 +114,7 @@ export class GastoFormCreateEditComponent implements OnInit, OnDestroy {
           to_account_id: this.newBill.value.to_account_id
         }
 
-        this.httpService = this.http.post('/transactions', billComplete).subscribe({
+        /*this.httpService = this.http.post('/transactions', billComplete).subscribe({
           next: (res) => this.handleNext(res),
           error: () => this.errorHandler(),
           complete: () => {
@@ -123,7 +125,7 @@ export class GastoFormCreateEditComponent implements OnInit, OnDestroy {
             this.newBill.reset()
           }
         }
-        )
+        )*/
       }
     })
   }

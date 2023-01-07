@@ -10,10 +10,11 @@ import { accountsReducer } from './reducers/accounts.reducer';
 import { transactionsReducer } from './reducers/transactions.reducer';
 import { TransactionsEffects } from './effects/transactions.effects';
 
-import { authReducer } from './auth/auth.reducer';
+import { userReducer } from './reducers/user.reducer';
 import { NgModule } from '@angular/core';
 
 import { AccountsEffects } from './effects/accounts.effects';
+import { AuthEffects } from './effects/auth.effects';
 
 
 export const FEATURE_KEY = 'sharedState';
@@ -23,8 +24,8 @@ export interface AppState {
   transactions: any;
 }
 
-export const reducers: ActionReducerMap<AppState> = {
-  user: authReducer,
+export const ROOT_REDUCERS: ActionReducerMap<AppState> = {
+  user: userReducer,
   accounts: accountsReducer,
   transactions: transactionsReducer,
 };
@@ -34,11 +35,11 @@ export const metaReducers: MetaReducer<AppState>[] = [];
 
 
 @NgModule({
-  imports: [StoreModule.forFeature(FEATURE_KEY, reducers, { metaReducers })],
+  imports: [StoreModule.forFeature(FEATURE_KEY, ROOT_REDUCERS, { metaReducers })],
 })
 export class SharedStateModule { }
 
 export const selectSharedState = createFeatureSelector<AppState>(FEATURE_KEY);
 
-export const ROOT_EFFECTS = [TransactionsEffects, AccountsEffects]
+export const ROOT_EFFECTS = [TransactionsEffects, AccountsEffects, AuthEffects]
 

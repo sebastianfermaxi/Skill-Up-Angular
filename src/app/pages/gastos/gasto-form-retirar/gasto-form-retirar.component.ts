@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { HttpService } from 'src/app/core/services/http.service';
+//import { HttpService } from 'src/app/core/services/http.service';
 import { DialogComponent } from 'src/app/shared/components/dialog/dialog.component';
 import { IBill } from 'src/app/core/interfaces/Bills';
 import { Observable, Subscription } from 'rxjs';
@@ -10,7 +10,8 @@ import { AppState } from 'src/app/core/state/app.state';
 import { selectedAccount } from 'src/app/core/state/selectors/accounts.selectors';
 import { MatSelectChange } from '@angular/material/select';
 import { accountToggle } from 'src/app/core/state/actions/account.actions';
-import { selectedUser } from 'src/app/core/state/auth/auth.reducer';
+import { selectedUser } from 'src/app/core/state/selectors/user.selectors';
+
 
 @Component({
   selector: 'ew-gasto-form-retirar',
@@ -42,7 +43,7 @@ export class GastoFormRetirarComponent implements OnInit, OnDestroy {
   @Output() billResponseChange: EventEmitter<IBill> = new EventEmitter();
 
   constructor(
-    private http: HttpService,
+    //private http: HttpService,
     public dialog: MatDialog,
     private store: Store<AppState>
   ) {
@@ -53,13 +54,14 @@ export class GastoFormRetirarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.httpGet = this.http.get('/accounts/me').subscribe({
+    //TODO: consumir el storage
+    /*this.httpGet = this.http.get('/accounts/me').subscribe({
       next: (res) => {
         this.accounts = res
       },
       error: () => this.errorHandler()
     }
-    )
+    )*/
   }
 
   ngOnDestroy(): void {
@@ -94,7 +96,7 @@ export class GastoFormRetirarComponent implements OnInit, OnDestroy {
           userId: this.userId,
           to_account_id: 5
         }
-
+        /*
         this.httpPost = this.http.post('/transactions', billComplete).subscribe({
           next: (res) => this.handleNext(res),
           error: () => this.errorHandler(),
@@ -106,7 +108,7 @@ export class GastoFormRetirarComponent implements OnInit, OnDestroy {
             this.newBill.reset()
           }
         }
-        )
+        )*/
       }
     })
   }

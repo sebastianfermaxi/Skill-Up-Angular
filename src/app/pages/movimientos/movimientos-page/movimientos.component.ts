@@ -60,13 +60,14 @@ export class MovimientosComponent implements OnInit, OnDestroy {
       }
     })*/
 
+    /*TODO
     this.trQueryMade = this.trQueryMade$.subscribe(made => {
       if (made) { //Si los datos ya estan cargados
         this.store.dispatch(trTopupPaymentData_REQ())//Procesa la tabla y el grafico
       } else { //Si no estan cargados se los pide a la API
         this.store.dispatch(transactions_REQ())
       }
-    })
+    })*/
 
     this.tableData = this.tableData$.subscribe((resp: TableData | null) => {
       if (resp !== null) {
