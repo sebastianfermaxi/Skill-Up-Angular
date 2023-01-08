@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { LoginRes } from 'src/app/core/interfaces/LoginRes';
 //import { HttpService } from 'src/app/core/services/http.service';
 import { AlertComponent } from 'src/app/shared/components/alert/alert.component';
 import { __values } from 'tslib';
@@ -58,9 +59,9 @@ export class ResetPassComponent implements OnInit {
     });*/
   }
 
-  private responseHandler(res: any): void {
-    if (res.accessToken) {
-      localStorage.setItem('token', res.accessToken);
+  private responseHandler(res: LoginRes): void {
+    if (res.token) {
+      localStorage.setItem('token', res.token);
     }
   }
 

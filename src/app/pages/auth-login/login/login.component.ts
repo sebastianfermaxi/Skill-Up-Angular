@@ -11,6 +11,7 @@ import { authLogin_REQ, authLogin_RES } from 'src/app/core/state/actions/auth.ac
 import { AppState } from 'src/app/core/state/app.state';
 import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/core/state/services/auth.service';
+import { LoginRes } from 'src/app/core/interfaces/LoginRes';
 //import { HttpService } from 'src/app/core/services/http.service';
 
 @Component({
@@ -66,9 +67,9 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  private responseHandler(loginRes: any): void {
-    if (loginRes.accessToken) {
-      localStorage.setItem('token', loginRes.accessToken)
+  private responseHandler(loginRes: LoginRes): void {
+    if (loginRes.token) {
+      localStorage.setItem('token', loginRes.token)
       this.store.dispatch(authLogin_RES({loginRes}))
     }
   }
