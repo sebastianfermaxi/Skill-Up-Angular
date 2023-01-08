@@ -7,11 +7,14 @@ import { IBill } from 'src/app/core/interfaces/Bills';
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/core/state/app.state';
-import { ARSAccount, selectedAccount, USDAccount } from 'src/app/core/state/selectors/accounts.selectors';
+import { ARSAccount, selectedAccount, selectedExchange, USDAccount } from 'src/app/core/state/selectors/accounts.selectors';
 import { MatSelectChange } from '@angular/material/select';
-import { accountToggle } from 'src/app/core/state/actions/account.actions';
+import { accountToggle, exchangeToggle } from 'src/app/core/state/actions/account.actions';
 import { Account } from 'src/app/core/interfaces/Account';
 import { selectedUser } from 'src/app/core/state/selectors/user.selectors';
+import { AccountsStates } from 'src/app/core/state/interfaces/state.interface';
+import { AccountsService } from 'src/app/core/state/services/accounts.service';
+import { TransactionsService } from 'src/app/core/state/services/transactions.service';
 
 @Component({
   selector: 'ew-gasto-form-create-edit',
@@ -28,6 +31,7 @@ export class GastoFormCreateEditComponent implements OnInit, OnDestroy {
   userId!: number;
   ars!: Account;
   usd!: Account;
+  exchange: AccountsStates['exchange']='ars';
   amount = new FormControl(Validators.required);
   concept = new FormControl('', Validators.minLength(4));
   to_account_id = new FormControl(Validators.required);
@@ -48,6 +52,9 @@ export class GastoFormCreateEditComponent implements OnInit, OnDestroy {
   usdAccount$: Observable<any> = new Observable();
   usdAccount: Subscription = new Subscription;
   currentUser$: Observable<any> = new Observable();
+  exchange$: Observable<any> = new Observable();
+  exchangeSub: Subscription = new Subscription;
+
   currentUser: Subscription = new Subscription;
   httpService: Subscription = new Subscription;
   @Input() billResponse: IBill | undefined;
@@ -56,16 +63,19 @@ export class GastoFormCreateEditComponent implements OnInit, OnDestroy {
   constructor(
     //private http: HttpService,
     public dialog: MatDialog,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private transactionsS: TransactionsService
   ) {
     this.selectedAccount$ = this.store.select(selectedAccount);
     this.currentUser$ = this.store.select(selectedUser);
     this.arsAccount$ = this.store.select(ARSAccount);
     this.usdAccount$ = this.store.select(USDAccount);
+    this.exchange$ = this.store.select(selectedExchange);
     this.selectAccount = this.selectedAccount$.subscribe(value => this.account_id.setValue(value));
     this.currentUser = this.currentUser$.subscribe(value => this.userId = value.id);
     this.arsAccount = this.arsAccount$.subscribe(value => this.ars = value);
     this.usdAccount = this.usdAccount$.subscribe(value => this.usd = value);
+    this.exchangeSub = this.exchange$.subscribe(value => this.exchange = value);
   }
 
   ngOnInit(): void {
@@ -86,6 +96,7 @@ export class GastoFormCreateEditComponent implements OnInit, OnDestroy {
     this.arsAccount.unsubscribe();
     this.usdAccount.unsubscribe();
     this.httpService.unsubscribe();
+    this.exchangeSub.unsubscribe();
   }
 
   createBill(): void {
@@ -109,12 +120,12 @@ export class GastoFormCreateEditComponent implements OnInit, OnDestroy {
           concept: this.newBill.value.concept,
           date: this.setDate(this.newBill.value.date),
           type: 'payment',
-          accountId: this.setAccount(this.newBill.value.accountId),
-          userId: this.userId,
+          accountId: 5,//TODO: this.setAccount(this.newBill.value.accountId),
+          userId: 4,//TODO this.userId,
           to_account_id: this.newBill.value.to_account_id
         }
-
-        /*this.httpService = this.http.post('/transactions', billComplete).subscribe({
+        console.log('billComplete',this.exchange,billComplete,this.selectedAccount$)
+        this.transactionsS.setTransaction(this.exchange,billComplete).subscribe({
           next: (res) => this.handleNext(res),
           error: () => this.errorHandler(),
           complete: () => {
@@ -124,8 +135,7 @@ export class GastoFormCreateEditComponent implements OnInit, OnDestroy {
             }, 1500);
             this.newBill.reset()
           }
-        }
-        )*/
+        })
       }
     })
   }
@@ -165,6 +175,10 @@ export class GastoFormCreateEditComponent implements OnInit, OnDestroy {
 
   setCurrentAccount(event: MatSelectChange): void {
     this.store.dispatch(accountToggle({ selectedAccount: event.value }));
+    let exchange:string =  event.value
+    exchange = exchange.slice(0,3).toLocaleLowerCase();
+    console.log('exchange',exchange)
+    this.store.dispatch(exchangeToggle({ exchange: exchange as AccountsStates['exchange'] }));
   }
 
   resetForm(): void {

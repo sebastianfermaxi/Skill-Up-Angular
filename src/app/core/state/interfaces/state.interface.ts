@@ -15,10 +15,11 @@ export interface User {
 
 
 export interface AccountsStates {
-  AccountsQueryMade: boolean
+  accountsQueryMade: boolean
   selectedAccount: 'USDAccount'|'ARSAccount'
   ARSAccount: Account|null
   USDAccount: Account|null
+  exchange: 'ars'|'usd'
 }
 
 export interface TransactionsState {

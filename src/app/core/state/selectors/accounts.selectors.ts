@@ -7,12 +7,17 @@ export const selectAccounts = (state: AppState) => state.accounts;
 
 export const accountsQueryMade = createSelector(
   selectAccounts,
-  (state: AccountsStates) => state.AccountsQueryMade
+  (state: AccountsStates) => state.accountsQueryMade
 );
 
 export const selectedAccount = createSelector(
   selectAccounts,
   (state: AccountsStates) => state.selectedAccount
+);
+
+export const selectedExchange = createSelector(
+  selectAccounts,
+  (state: AccountsStates) => state.exchange
 );
 
 export const ARSAccount = createSelector(

@@ -59,7 +59,7 @@ export class BalancesComponent implements OnInit, OnDestroy {
     */
     //Iniciador del estado para las cuentas
     this.selectAccounts = this.selectAccounts$.subscribe((accountsStates: AccountsStates) => {
-      if (accountsStates.AccountsQueryMade) { //Si los datos ya estan cargados
+      if (accountsStates.accountsQueryMade) { //Si los datos ya estan cargados
         this.accountsQueryMade = true
         if (this.accountsQueryMade && this.trQueryMade) {
           this.store.dispatch(trBalanceData_REQ())//Procesa el grafico
