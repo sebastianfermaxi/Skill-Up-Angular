@@ -13,6 +13,8 @@ import { MeRes } from '../interfaces/MeRes';
 import { accounts_REQ, accounts_RES } from '../state/actions/account.actions';
 import { authLogin_RES, authMe_RES } from '../state/actions/auth.actions';
 import { AuthService } from '../state/services/auth.service';
+import jwt_decode from "jwt-decode";
+import { JWT } from '../interfaces/JWT';
 
 @Injectable({
   providedIn: 'root',
@@ -38,8 +40,16 @@ export class LoggedGuard implements CanActivate {
       this._router.navigateByUrl('/auth');
       return false;
     }
-    //TODO: Implementar auth/me
-    
+
+
+    //Sesion expirada
+    let now = new Date()
+    let decodeToken:JWT = jwt_decode(token)
+    let exp = new Date(decodeToken.exp*1000)
+    if(now>exp){
+      this.store.dispatch({ type: '[User] Logout' });
+    }
+
     this.authS.me().subscribe({
       next: (meRes: MeRes) => {
         console.log(meRes)

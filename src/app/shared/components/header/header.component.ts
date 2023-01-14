@@ -63,8 +63,5 @@ export class HeaderComponent implements OnDestroy {
 
   logout() {
     this.store.dispatch({ type: '[User] Logout' });
-    localStorage.getItem('token');
-    localStorage.removeItem('token');
-    this.router.navigate(['/auth']);
   }
 }

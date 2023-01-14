@@ -6,6 +6,7 @@ import { map, mergeMap, catchError, withLatestFrom } from 'rxjs/operators';
 import { AppState } from '../app.state';
 import { Store } from '@ngrx/store';
 import { AccountsService } from '../services/accounts.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AccountsEffects {
@@ -13,7 +14,8 @@ export class AccountsEffects {
     constructor(
         private actions$: Actions,
         private accountsService: AccountsService,
-        private store:Store<AppState>
+        private store:Store<AppState>,
+        private router: Router
     ) { }
 
     loadAccounts$ = createEffect(() => this.actions$.pipe(
@@ -59,6 +61,8 @@ export class AccountsEffects {
     logoutAccounts$ = createEffect(() => this.actions$.pipe(
         ofType('[User] Logout'),
         map(()=>{
+            localStorage.removeItem('token');
+            this.router.navigate(['/auth']);
             return {
                 type: '[Account] Clean accounts'
                 }
