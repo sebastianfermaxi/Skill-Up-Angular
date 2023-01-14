@@ -54,7 +54,7 @@ export class LoggedGuard implements CanActivate {
       next: (meRes: MeRes) => {
         console.log(meRes)
         this.store.dispatch(authMe_RES( {meRes, token: token ? token : ''} ))
-        //this.store.dispatch(accounts_REQ());
+        this.store.dispatch(accounts_RES( { ARSAccount: meRes.ARSAccount, USDAccount: meRes.USDAccount } ))
       },
       error: () => this.openDialog('Sesión expirada', 'Debe volver a iniciar sisión'),
       complete: () => true

@@ -51,8 +51,8 @@ export class DevelopmentOnlyService {
           "concept": "Pago de honorarios",
           "date": date.toISOString(),
           "type": typeStr[this.random(0,1)],
-          "accountId": ARSAccount.id,
-          "userId": ARSAccount.userId,
+          //"accountId": ARSAccount.id,
+          //"userId": ARSAccount.userId,
           "to_account_id": 1850
         }      
         //this.httpS.post('/transactions',tr).subscribe(res=>console.log(res))
@@ -79,8 +79,8 @@ export class DevelopmentOnlyService {
           "concept": "Pago de honorarios",
           "date": date.toISOString(),
           "type": typeStr[this.random(0,1)],
-          "accountId": USDAccount.id,
-          "userId": USDAccount.userId,
+          //"accountId": USDAccount.id,
+          //"userId": USDAccount.userId,
           "to_account_id": 1850
         }      
         //this.httpS.post('/transactions',tr).subscribe(res=>console.log(res))
