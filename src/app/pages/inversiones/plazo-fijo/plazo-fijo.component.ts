@@ -97,7 +97,8 @@ export class PlazoFijoComponent implements OnInit, OnDestroy {
 
   elegirCuenta(accountId: any) {
     // setea los datos de la cuenta elegida
-    if (this.accounts.length > 0) {
+    //TODO
+    /*if (this.accounts.length > 0) {
       this.selectedAccount = this.accounts.find(a => a.id === accountId)!;
       this.saldo = this.selectedAccount.money;
 
@@ -111,7 +112,7 @@ export class PlazoFijoComponent implements OnInit, OnDestroy {
       this.userId = this.selectedAccount.userId;
       this.selectedAccountId = this.selectedAccount.id;
       this.accountId = this.selectedAccount.id;
-    }
+    }*/
   }
 
   submit(): void {

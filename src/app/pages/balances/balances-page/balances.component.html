@@ -8,11 +8,11 @@
   <mat-divider></mat-divider>
 
   <mat-card-content>
-    <ew-loader *ngIf="accountStatus.length === 0;else showBalance;" ></ew-loader>
+    <ew-loader *ngIf="cuentas.length === 0;else showBalance;" ></ew-loader>
     <ng-template #showBalance>
       <ul class="account-list">
-        <li *ngFor="let item of accountStatus; index as i;" >
-          <ew-balance-info [accountStatus]="item" [index]="i">
+        <li *ngFor="let item of cuentas; index as i;" >
+          <ew-balance-info [accountStatus]="item.account" [index]="i">
           </ew-balance-info>
         </li>
       </ul>

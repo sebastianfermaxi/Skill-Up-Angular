@@ -7,13 +7,13 @@
     <div class="others">
       <div>
         <p class="blue">ID:</p> 
-        <p>{{accountStatus && accountStatus.id}}</p>
+        <!--p>{{accountStatus && accountStatus.id}}</p-->
       </div>
       <div>
         <p class="blue">Está bloqueada:</p> 
-        <p> {{accountStatus && accountStatus.isBlocked ? 'Si' : 'No'}}</p>
+        <!--p> {{accountStatus && accountStatus.isBlocked ? 'Si' : 'No'}}</p-->
       </div>
     </div>
   </mat-card-content>
-  <mat-card-footer>Fecha creación: {{accountStatus && setDate(accountStatus.creationDate)}}</mat-card-footer>
+  <mat-card-footer>Último movimiento: {{accountStatus && setDate(accountStatus.updatedAt)}}</mat-card-footer>
 </mat-card>

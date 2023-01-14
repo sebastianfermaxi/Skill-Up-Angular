@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Account } from 'src/app/core/interfaces/Account';
 import { IBalance } from 'src/app/core/interfaces/Balance';
 
 @Component({
@@ -8,7 +9,7 @@ import { IBalance } from 'src/app/core/interfaces/Balance';
 })
 export class BalanceInfoComponent {
 
-  @Input() accountStatus!: IBalance | undefined;
+  @Input() accountStatus!: Account | undefined;
   @Input() index: number = 0;
 
   constructor() { }

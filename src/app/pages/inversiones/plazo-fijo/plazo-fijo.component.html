@@ -10,8 +10,8 @@
                 N° de cuenta
             </mat-label>
             <mat-select disabled (selectionChange)="elegirCuenta($event.value)" [(value)]="selectedAccountId" appearance="fill">
-                <mat-option *ngFor="let account of accounts" [value]="account.id">
-                    {{account.id}}
+                <mat-option *ngFor="let account of accounts"><!--TODO [value]="account.id"
+                    {{account.id}} -->
                 </mat-option>
             </mat-select>
         </mat-form-field>

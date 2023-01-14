@@ -173,7 +173,7 @@ export class TransactionsEffects {
         fechas: []
       } 
 
-      let trARS = ingresosEgresos.filter(tr=>tr.accountId == accounts.ARSAccount?.id)
+      /*TODO let trARS = ingresosEgresos.filter(tr=>tr.accountId == accounts.ARSAccount?.id)
       let trUSD = ingresosEgresos.filter(tr=>tr.accountId == accounts.USDAccount?.id)
 
 
@@ -200,7 +200,7 @@ export class TransactionsEffects {
       for (let i = index; i<chartData.fechas.length; i++) {
         chartData.balanceARS[i]=NaN
         chartData.balanceUSD[i]=NaN
-      }
+      }*/
 
       return chartData
     }
